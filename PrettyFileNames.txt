@@ -1,0 +1,316 @@
+
+Pretty File Names v2.2 Final - Uploaded Feb 15, 2008
+
+Hi again all. This module will sort string array items of file paths which may contain numeric characters in a more natural order. I created this in response to a comment made on a previous submission. It is complete with demo and sample files so you can easily load and sort to see the results of the different settings available.
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+It is intended for sorting file names, and will apply the same intuitive order for folders in the file path if they contain numeric characters. It will take into account all occurences of numbers in the string item including in the extension.
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+Specifying a path is not required, neither do they need to have extensions, in fact, they do not need to be file names at all; just strings that may contain numeric characters within the string text. In other words, it can be used for normal pretty-sorting operations as well. But please note, this is intended for sorting file names and is a little slower than the included Pretty Number Sorter because of extra code to handle the extensions.
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+It can order the items by extension, whilst still producing an intuitive order of the file path and names that may have numbers within them and that have the same extension. Or you can group by folder but still include extensions in the comparisons without grouping by them.
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+Also included is a compare function that can be used in place of VB's StrComp that will order the filename items it compares based on the settings described above. It does not sort an array of items but compares just two items and returns the result.
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+This is version 2 (2-5-08) in response to a request to add the handling of numbers in the extension. Bug Fix update 2-6-08. 
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+Version 2.1 (2-7-08) adds Indexed versions of my Pretty Sorters. Included in this module: strPrettyFileNames, strPrettyFileNamesIndexed, StrCompFileNames, strPrettyNumSort, strPrettyNumSortIndexed, StrCompNumbers, strPrettySort, strPrettySortIndexed, ValidateIdxArray, strStableSort2Indexed, strSwapSort4Indexed, InitedArray
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+Update (2-8-08) removed the 260 character limit on the three file name routines.
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+Update (2-15-08) with latest and final version of Stable QuickSort v2.2.
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+'
+' Pretty Sort string array sorting algorithms.
+'
+' Intuitive/natural sorting and comparison functions.
+'
+' The following are intended for sorting filenames that
+' may contain numbers in a more intuitive order:
+'
+'  strPrettyFileNames
+'  strPrettyFileNamesIndexed
+'  StrCompFileNames
+'
+' The following are intended for sorting strings that
+' may contain numbers in a more intuitive order:
+'
+'  strPrettyNumSort
+'  strPrettyNumSortIndexed
+'  StrCompNumbers
+'
+' The following are intended for sorting strings that
+' do not contain numbers in a more intuitive order:
+'
+'  strPrettySort
+'  strPrettySortIndexed
+'
+' You are free to use any part or all of this code even for
+' commercial purposes in any way you wish under the one condition
+' that no copyright notice is moved or removed from where it is.
+'
+' For comments, suggestions or bug reports you can contact me at:
+' rd•edwards•bigpond•com.
+'
+
+
+' + Pretty File Names Sorter +++++++++++++++++++++++++++
+
+' This sub will sort string array items containing numeric
+' characters in a more intuitive order. It will take into
+' account all occurences of numbers in the string item.
+
+' It is intended for sorting filenames, and will apply the
+' same intuitive order for folders in the file path if they
+' contain numeric characters.
+
+' Specifying a path is not required, neither do they need to
+' have extensions, in fact, they do not need to be filenames;
+' just strings that may contain numbers grouped together
+' within the string text.
+
+' In other words, it can be used for normal pretty sorting
+' operations. But please note, this is intended for sorting
+' filenames and is a little slower than the strPrettyNumSort
+' sub below because of extra code to handle the extensions.
+
+' If GroupByExtension is specified it will order the items by
+' extension, whilst still producing an intuitive order of the
+' file path and names that may have numbers within them and
+' that have the same extension.
+
+' This is version two of the Pretty File Names routine which
+' handles numbers in the extension.
+
+' + Indexed Pretty File Names Sorter +++++++++++++++++++++
+
+' This is an indexed version of the Pretty File Names Sorter above.
+
+' This version uses a long array that holds references to the string
+' arrays indices. This is known as an indexed sort. No changes are made
+' to the source string array.
+
+' After a sort procedure is run the long array is ready as a sorted
+' index to the string array items.
+
+' E.G sA(idxA(lo)) returns the lo item in the string array whose
+' index may be anywhere in the string array.
+
+' + Pretty File Names Compare Function +++++++++++++++++++
+
+' This function will compare two string items containing numeric characters in
+' a more intuitive order. It will take into account all occurences of numbers in
+' the string items including in their extensions.
+
+' It is intended for comparing filenames, and will apply the same intuitive order
+' for folders in the file path if they contain numeric characters.
+
+' Specifying a path is not required, neither do they need to have extensions, in
+' fact, they do not need to be filenames; just strings that may contain numbers
+' grouped together within the string text.
+
+' In other words, it can be used for normal pretty sorting comparisons.
+' But please note, this is intended for comparing filenames and is a little
+' slower than the StrCompNumbers compare function below because of extra code
+' to handle the extensions.
+
+' If SortByExtension is specified it will compare the items by extension, whilst
+' still producing an intuitive order of the file path and names that may have
+' numbers within them and that have the same extension.
+
+' This is version two of this function which handles numbers in the extension.
+
+' + Pretty Number Sorter +++++++++++++++++++++++++++++++++
+
+' This routine will sort string array items containing numeric characters
+' in a more intuitive order. It will take into account all occurences of
+' numbers in string items of any length.
+
+' It first sorts with binary comparison to seperate upper and lower case
+' letters in the order specified by CapsFirst.
+
+' It then sorts in the desired direction with case-insensitive comparison
+' to group upper and lower case letters together, but with a stable sorter
+' to preserve the requested caps-first or lower-first order.
+
+' + Indexed Pretty Number Sorter +++++++++++++++++++++++++
+
+' Indexed version of the Pretty Number Sorter above.
+
+' This version uses a long array that holds references to the string
+' arrays indices. This is known as an indexed sort. No changes are made
+' to the source string array.
+
+' After a sort procedure is run the long array is ready as a sorted
+' index to the string array items.
+
+' E.G sA(idxA(lo)) returns the lo item in the string array whose
+' index may be anywhere in the string array.
+
+' + Pretty Number Compare Function +++++++++++++++++++++++
+
+' This function will compare two string items containing numeric
+' characters in a more intuitive order. It will take into account
+' all occurences of numbers in string items of any length.
+
+' + Pretty Sorter ++++++++++++++++++++++++++++++++++++++++++
+
+' Sort with binary comparison to seperate upper and lower
+' case letters in the order specified by CapsFirst.
+
+' Then sort in the desired direction with case-insensitive
+' comparison to group upper and lower case letters together,
+' but with a stable sort to preserve the requested caps-first
+' or lower-first order.
+
+' + Indexed Pretty Sorter ++++++++++++++++++++++++++++++++++
+
+' Indexed version of the Pretty Sorter above.
+
+' This version uses a long array that holds references to the string
+' arrays indices. This is known as an indexed sort. No changes are made
+' to the source string array.
+
+' After a sort procedure is run the long array is ready as a sorted
+' index to the string array items.
+
+' E.G sA(idxA(lo)) returns the lo item in the string array whose
+' index may be anywhere in the string array.
+
+' + Validate Index Array +++++++++++++++++++++++++++++++++
+
+' This will initialize the passed index array if it is not already.
+
+' This sub-routine requires that the index array be passed either
+' prepared for the sort process (see the For loop) or that it be
+' uninitialized (or Erased).
+
+' This permits subsequent sorting of the data without interfering
+' with the index array if it is already sorted (based on criteria
+' that may differ from the current process) and so is not in its
+' uninitialized or primary pre-sort state produced by the For loop.
+
+' + StableSort 2.2 Indexed Version ++++++++++++++++++++
+
+' This is a re-working of my stable Avalanche algorithm.
+
+' This is a non-recursive quicksort based algorithm that has
+' been written from the ground up as a stable alternative to
+' the blindingly fast quicksort.
+
+' It is not quite as fast as the outright fastest non-stable
+' quicksort, but is still very fast as it uses buffers and
+' copymemory and is beaten by none of my other string sorting
+' algorithms except my fastest non-stable quicksort.
+
+' A standard quick-sort only moves items that need swapping,
+' while this stable algorithm manipulates all items on every
+' iteration to keep them all in relative positions to one
+' another. This algorithm I have dubbed the Avalanche©.
+
+' A runner section has been added to handle a very hard job
+' for a stable sorter; reverse pretty sorting.
+
+' Reverse pretty sorting is case-insensitive sorting of data
+' that has been pre-sorted case-sensitively in reverse order
+' (lower-case first in ascending order, or capitals first in
+' descending order).
+
+' Case-insensitive sorting is much more demanding than binary
+' compare/case-sensitive sorting.
+
+' It utilises a runner technique to boost this very demanding
+' operation, down from 2.0 to 1.4 seconds on 100,000 items on
+' my 866 MHz P3. Adding runners has also boosted stable reverse-
+' sorting and same-direction pretty sorting operations.
+
+' Because all items are re-positioned based on the current value
+' it can identify when the avalanche process is producing a zero
+' count buffer one way and so is moving all items the other way,
+' indicating that the data is in a pre-sorted state (shifting no
+' items up/down in relation to the current item).
+
+' On each iteration a test of the buffer counts can identify when
+' it is re-sorting or reverse-sorting, as well as producing
+' distinctive indicators on reverse-pretty and same-direction
+' pretty sorting operations. The range becomes very small on
+' unsorted data before a small range produces a zero count buffer,
+' so small ranges are ignored to skip false indicators.
+
+' So when performing a reverse or pretty sort operation the code
+' can identify this state and the runners are turned on automatically.
+
+' Note that stable reverse-sorting operations are quite different
+' to a non-stable inversion style reverse operation.
+
+' The latest version of this algorithm identifies sub-sets of
+' pre-sorted data and delegates it to a built-in insert/binary
+' hybrid algorithm dubbed the Twister.
+
+' This delegation is the sole reason for the speed boost on all
+' operations over version 2.1, and also the reason for the incredibly
+' fast refresh sorting performance - it can refresh-sort 3,248,230
+' pre-sorted strings in under 2 and a half seconds (2.4966),
+' tested on my 866MHz P3.
+
+' This algorithm is one of my outright fastest at these operations,
+' beaten only by my absolute fastest non-stable quicksort below!
+
+' This is the indexed version which allows the source array to
+' remain unchanged. This also allows the index array to be passed
+' on to other sort processes to be further manipulated.
+
+' + SwapSort 4 Indexed Version ++++++++++++++++++++++++
+
+' This is my indexed non-recursive swapsort - a super fast
+' quicksort algorithm using variable pointers and copymemory.
+
+' The heart of the algorithm has been completely re-written
+' and bears little resemblance to the original quicksort
+' algorithm and is much much faster.
+
+' This algorithm I have dubbed the Blizzard©.
+
+' The Blizzard algorithm is completely unfazed when re-sorting
+' very large arrays that are already sorted and reverse-sorting
+' of very large sorted arrays, unlike many other quicksorts.
+' In fact, it is very very fast at it.
+
+' It has the benifit of indexing which allows the source array
+' to remain unchanged. This also allows the index array to be
+' passed on to other sort processes to be further manipulated.
+
+' This is my outright fastest array sorting algorithm.
+
+' + Inited Array ++++++++++++++++++++++++++++++++++++++++
+
+' This function determines if the passed array is initialized,
+' and if so will return -1.
+
+' It will also optionally indicate whether the array can be
+' redimmed - in which case it will return -2.
+
+' If the array is uninitialized (has never been redimmed or
+' has been erased) it will return 0 (zero).
+
+' +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+' Rd - crYptic but cRaZy!
